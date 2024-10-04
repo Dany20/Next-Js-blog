@@ -1,0 +1,26 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Configure your database here
+// Learn more: https://pris.ly/d/connection-strings
+// The database connection string can be found in the .env file using `DATABASE_URL
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Defining a Post model
+model Post {
+  id    String  @id @default(cuid())
+  title String  @db.VarChar(255)  // Will generate VARCHAR
+  content String                  // Will generate TEXT
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
